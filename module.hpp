@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector> 
+#include <tuple>
+#include <iostream>
 
 namespace s5poo
 {
@@ -27,8 +29,42 @@ namespace s5poo
         {
             return name_;
         }
-        
 
+        int size_vector()
+        {
+            return (int)values_.size();
+        }
+        
+        const std::tuple<double*,double*> interval()
+        {
+           return std::make_tuple(&min_,&max_);
+        }
+
+        const auto get_value(int index)
+        {
+            try 
+            {
+            
+                if(index < 0)
+                {
+                    throw "index too low ! ";
+                }
+                else if(index > (int)values_.size())
+                {
+                    throw "index too high ! ";
+                }
+                else
+                {
+                    return values_[index];
+                }
+            }
+            
+            catch (char const* e)
+            {
+                std::cout << e;
+                return 0.0;
+            }
+        }
     };
 } // namespace s5poo
 
