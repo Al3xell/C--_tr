@@ -1,6 +1,4 @@
 .vscode
 prog
-prog.d
-prog.o
-module.o
-module.d
+*.d
+*.o
