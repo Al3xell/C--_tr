@@ -19,18 +19,14 @@ namespace s5loo
         for(int i=0; i < (int)array.size(); i++)
         {
             int x = lengthDistrib(rndGen);
-            for(int j=0; j < x; j++)
-            {
-                char y = (char)charDistrib(rndGen);
-                array[i].push_back(y);
-            }
+            for(int j=0; j < x; j++) array[i].push_back((char)charDistrib(rndGen));
         }
         
     }
 
     void printArray(const str15 &array)
     {
-        std::cout << "value in array : ";
+        std::cout << "\nvalue in array : ";
         for(int i=0; i < (int)array.size(); i++) std::cout << "{" << array[i] << "} ";
         std::cout << '\n';
     }
