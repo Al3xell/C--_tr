@@ -14,6 +14,12 @@ namespace s5loo
 
         Color(uchar red, uchar green, uchar blue) : red_(red), green_(green), blue_(blue) {}
         Color() : red_(0), green_(0), blue_(0) {};
+        Color(const Color &) = default; //constructeur par recopie
+        Color(Color &&) = default; //constructeur par déplacement
+        Color& operator=(const Color &) = default; //affectation par recopie
+        Color& operator=(Color &&) = default; //affectation par déplacement
+        ~Color() = default; //destructeur
+
         uchar& operator[](int i);
         uchar operator[](int i) const;
     };
