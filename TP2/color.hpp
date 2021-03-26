@@ -13,18 +13,18 @@ namespace s5loo
         uchar red_, green_, blue_;
 
         Color(uchar red, uchar green, uchar blue) : red_(red), green_(green), blue_(blue) {}
-        Color() : red_(0), green_(0), blue_(0) {}
-        uchar& Color::operator[](int i, uchar arg);
-        const uchar& Color::operator[](int i);
+        Color() : red_(0), green_(0), blue_(0) {};
+        uchar& operator[](int i) const;
+        uchar& operator[](int i);
     };
 
-    uchar& Color::operator[](int i, uchar arg)
+    inline uchar& Color::operator[](int i) 
     {
         try
         {
-            if(i==0) arg = Color::red_;
-            else if(i==1) arg = Color::green_;
-            else if(i==2) arg = Color::blue_;
+            if(i==0) return red_;
+            else if(i==1) return green_;
+            else if(i==2) return blue_;
             else throw std::out_of_range{"Index needs to be between 0 and 2"};
         }
         catch(std::exception &e)
@@ -32,20 +32,16 @@ namespace s5loo
             std::cout << e.what();
         }
     }
-
-    inline const uchar& Color::operator[](int i) 
+    
+    inline std::ostream& operator<<(std::ostream& os, const Color& color)
     {
-        try
-        {
-            if(i==0) return Color::red_;
-            else if(i==1) return Color::green_;
-            else if(i==2) return Color::blue_;
-            else throw std::out_of_range{"Index needs to be between 0 and 2"};
-        }
-        catch(std::exception &e)
-        {
-            std::cout << e.what();
-        }
+        return os << "(" << (int)color.red_ << ", " << (int)color.green_ << ", " << (int)color.blue_ << ")\n";
+    }
+
+    inline Color grey(const Color& color)
+    {
+        uchar average = (uchar)(((int)color.red_+(int)color.green_+(int)color.blue_)/3);
+        return Color(average,average,average);
     }
 } // namespace s5loo
 
