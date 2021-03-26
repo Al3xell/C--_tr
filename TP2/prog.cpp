@@ -12,7 +12,7 @@ void test_color()
     std::cout << "Red : " << red;
     std::cout << "C : " << c;
     std::cout << "Grey : " << g;
-    std::cout << "Noir : " << noir;
+    std::cout << "Noir : " << (int)noir[0] << "\n";
 }
 
 int main(int argc, char const *argv[])

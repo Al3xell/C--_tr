@@ -14,11 +14,11 @@ namespace s5loo
 
         Color(uchar red, uchar green, uchar blue) : red_(red), green_(green), blue_(blue) {}
         Color() : red_(0), green_(0), blue_(0) {};
-        uchar& operator[](int i) const;
         uchar& operator[](int i);
+        uchar operator[](int i) const;
     };
 
-    inline uchar& Color::operator[](int i) 
+    inline uchar& Color::operator[](int i)
     {
         try
         {
@@ -30,6 +30,24 @@ namespace s5loo
         catch(std::exception &e)
         {
             std::cout << e.what();
+            std::exit(0);
+        }
+    }
+
+        inline uchar Color::operator[](int i) const
+    {
+        try
+        {
+            uchar value;
+            if(i==0) return value = red_;
+            else if(i==1) return value = green_;
+            else if(i==2) return value = blue_;
+            else throw std::out_of_range{"Index needs to be between 0 and 2"};
+        }
+        catch(std::exception &e)
+        {
+            std::cout << e.what();
+            std::exit(0);
         }
     }
     
