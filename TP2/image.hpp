@@ -21,6 +21,9 @@ namespace s5loo
         Image(std::string name, int width, int height, bool random = true);
         ~Image() = default;
         const std::string& getName() {return name_;}
+        void setName(std::string name) {name_ = name;}
+        void setWidth(int width);
+        void setHeight(int height);
         const int& getWidth() {return width_;}
         const int& getHeight() {return height_;}
         Color& operator[](int i) 
