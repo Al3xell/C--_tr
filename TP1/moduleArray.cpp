@@ -37,6 +37,5 @@ namespace s5loo
         std::reverse(rword.begin(),rword.end());
         if(word == rword) return true;
         else return false;
-        
     }
 } //namespace s5loo

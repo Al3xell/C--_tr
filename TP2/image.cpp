@@ -26,4 +26,10 @@ namespace s5loo
                }
                else for(int i = 0; i < width_*height_; i++) pixel_.emplace_back(Color());
            }
+    std::ostream& operator<<(std::ostream& os,Image& img)
+    {
+        os << "name : " << img.getName() << "\n\nwidth : " << img.getWidth() << " height : " << img.getHeight() << "\n\n";
+        for(int i = 0; i < size(img); i++) os << "pixel n°" << i << " : " << img[i] << "\n";
+        return os;
+    }
 } // namespace s5loo

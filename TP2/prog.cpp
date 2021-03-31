@@ -20,6 +20,9 @@ void test_simple_image()
 {
     s5loo::Image img1{"random", 5, 3};
     s5loo::Image img2{"black", 3, 4, false};
+    std::cout << img1 << "\n";
+    std::cout << img2;
+    //std::cout << img1[s5loo::size(img1)+1];
 }
 
 int main(int argc, char const *argv[])
