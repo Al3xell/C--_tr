@@ -19,14 +19,21 @@ namespace s5loo
     public:
 
         Image(std::string name, int width, int height, bool random = true);
+        Image(std::string path);
+        Image() = default;
+        Image(const Image &) = delete; //constructeur par recopie
+        Image& operator=(const Image &) = delete; //affectation par recopie
+        Image(Image &&) = default; //constructeur par déplacement
+        Image& operator=(Image &&) = default; //affectation par déplacement
         ~Image() = default;
-        const std::string& getName() {return name_;}
+        const std::string& getName() const {return name_;}
         void setName(std::string name) {name_ = name;}
         void setWidth(int width);
         void setHeight(int height);
-        const int& getWidth() {return width_;}
-        const int& getHeight() {return height_;}
-        Color& operator[](int i) 
+        void setPixels(std::vector<Color> pixels) {pixel_ = pixels;}
+        const int& getWidth() const {return width_;}
+        const int& getHeight() const {return height_;}
+        const Color& operator[](int i) const
         {
             try
             {
@@ -43,7 +50,10 @@ namespace s5loo
         }
 
     };
-    std::ostream& operator<<(std::ostream& os,Image& img);
-    inline int size(Image& img) {return img.getWidth()*img.getHeight();}
+    std::ostream& operator<<(std::ostream& os,const Image& img);
+    std::string imageName(std::string path);
+    inline int size(const Image& img) {return img.getWidth()*img.getHeight();}
+    void save(const Image& img);
+    Image grey(const Image& img);
 }
 #endif // !IMAGE_HPP

@@ -7,7 +7,7 @@ void test_color()
 {
     s5loo::Color red{255,0,0};
     s5loo::Color c;
-    c.green_ = 165;
+    s5loo::uchar test = c[1];
     s5loo::Color g = grey(red);
     const s5loo::Color noir;
     std::cout << "Red : " << red;
@@ -25,20 +25,74 @@ void test_simple_image()
     //std::cout << img1[s5loo::size(img1)+1];
 }
 
+void test_image(std::string path, bool greyBool)
+{
+    s5loo::Image img;
+    if(path.compare("") == 0)
+    {  
+        std::string name;
+        int width, height;
+        std::cout << "Insert name : ";
+        std::cin >> name;
+        do
+        {
+            std::cin.clear();
+            std::cin.ignore();
+            std::cout << "Insert width : ";
+        }while(!(std::cin >> width));
+        do
+        {
+            std::cin.clear();
+            std::cin.ignore();
+            std::cout << "Insert height : ";
+        }while(!(std::cin >> height));
+        std::cout << "\nNew Image created !\n\n";
+        img = s5loo::Image(name, width, height);
+        s5loo::save(img);
+        
+        if(greyBool)
+        {
+            s5loo::Image greyImg = s5loo::grey(img);
+            s5loo::save(greyImg);
+        }
+    }
+    else
+    {
+        img = s5loo::Image(path);
+        if(greyBool)
+        {
+            s5loo::Image greyImg = s5loo::grey(img);
+            s5loo::save(greyImg);
+        }
+    }
+    
+
+
+}
 int main(int argc, char const *argv[])
 {
     try
     {
         if(argc == 1)
         {
-            throw std::runtime_error{"To run this application, specify the name of the test you want to try. For example:\n./prog color\npossible tests are: color, simple_image"};
+            throw std::runtime_error{"To run this application, specify the name of the test you want to try. For example:\n./prog color\npossible tests are: color, simple_image, image args*"};
         }
         else
         {
             std::string str1 = argv[1];
             if(str1.compare("color") == 0) test_color();
             else if(str1.compare("simple_image") == 0) test_simple_image();
-            else throw std::runtime_error{"To run this application, specify the name of the test you want to try. For example:\n./prog color\npossible tests are: color, simple_image"};
+            else if(str1.compare("image") == 0)
+            {
+                if(argc < 3) test_image("",false);
+                else test_image(argv[2],false);
+            }
+            else if(str1.compare("grey") == 0)
+            {
+                if(argc < 3) test_image("",true);
+                else test_image(argv[2],true);
+            }
+            else throw std::runtime_error{"To run this application, specify the name of the test you want to try. For example:\n./prog color\npossible tests are: color, simple_image, image args*"};
         }
     }
     catch(const std::exception& e)

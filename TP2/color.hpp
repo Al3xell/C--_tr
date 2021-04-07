@@ -14,17 +14,17 @@ namespace s5loo
 
         Color(uchar red, uchar green, uchar blue) : red_(red), green_(green), blue_(blue) {}
         Color() : red_(0), green_(0), blue_(0) {};
-        Color(const Color &) = default; //constructeur par recopie
+        Color(const Color&) = default; //constructeur par recopie
         Color(Color &&) = default; //constructeur par déplacement
         Color& operator=(const Color &) = default; //affectation par recopie
         Color& operator=(Color &&) = default; //affectation par déplacement
         ~Color() = default; //destructeur
 
-        uchar& operator[](int i);
-        uchar operator[](int i) const;
+        const uchar& operator[](int i) const;
+        uchar operator[](int i);
     };
 
-    inline uchar& Color::operator[](int i)
+    inline const uchar& Color::operator[](int i) const
     {
         try
         {
@@ -40,7 +40,7 @@ namespace s5loo
         }
     }
 
-        inline uchar Color::operator[](int i) const
+        inline uchar Color::operator[](int i)
     {
         try
         {
@@ -62,9 +62,9 @@ namespace s5loo
         return os << "(" << (int)color.red_ << ", " << (int)color.green_ << ", " << (int)color.blue_ << ")\n";
     }
 
-    inline Color grey(const Color& color)
+    inline const Color grey(const Color& color)
     {
-        uchar average = (uchar)(((int)color.red_+(int)color.green_+(int)color.blue_)/3);
+        uchar average = (uchar)((color[0]+color[1]+color[2])/3);
         return Color(average,average,average);
     }
 } // namespace s5loo
