@@ -20,11 +20,11 @@ namespace s5loo
         Color& operator=(Color &&) = default; //affectation par déplacement
         ~Color() = default; //destructeur
 
-        const uchar& operator[](int i) const;
-        uchar operator[](int i);
+        uchar operator[](int i) const;
+        uchar& operator[](int i);
     };
 
-    inline const uchar& Color::operator[](int i) const
+    inline uchar Color::operator[](int i) const
     {
         try
         {
@@ -40,14 +40,14 @@ namespace s5loo
         }
     }
 
-        inline uchar Color::operator[](int i)
+        inline uchar& Color::operator[](int i)
     {
         try
         {
-            uchar value;
-            if(i==0) return value = red_;
-            else if(i==1) return value = green_;
-            else if(i==2) return value = blue_;
+            
+            if(i==0) return red_;
+            else if(i==1) return green_;
+            else if(i==2) return blue_;
             else throw std::out_of_range{"Index needs to be between 0 and 2"};
         }
         catch(std::exception &e)
@@ -59,7 +59,7 @@ namespace s5loo
     
     inline std::ostream& operator<<(std::ostream& os, const Color& color)
     {
-        return os << "(" << (int)color.red_ << ", " << (int)color.green_ << ", " << (int)color.blue_ << ")\n";
+        return os << "(" << (int)color[0] << ", " << (int)color[1]<< ", " << (int)color[2]<< ")\n";
     }
 
     inline const Color grey(const Color& color)

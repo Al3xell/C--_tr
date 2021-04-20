@@ -30,7 +30,6 @@ namespace s5loo
         void setName(std::string name) {name_ = name;}
         void setWidth(int width);
         void setHeight(int height);
-        void setPixels(std::vector<Color> pixels) {pixel_ = pixels;}
         const int& getWidth() const {return width_;}
         const int& getHeight() const {return height_;}
         const Color& operator[](int i) const

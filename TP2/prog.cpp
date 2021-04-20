@@ -7,7 +7,7 @@ void test_color()
 {
     s5loo::Color red{255,0,0};
     s5loo::Color c;
-    s5loo::uchar test = c[1];
+    c[1] = 165;
     s5loo::Color g = grey(red);
     const s5loo::Color noir;
     std::cout << "Red : " << red;
@@ -75,7 +75,7 @@ int main(int argc, char const *argv[])
     {
         if(argc == 1)
         {
-            throw std::runtime_error{"To run this application, specify the name of the test you want to try. For example:\n./prog color\npossible tests are: color, simple_image, image args*"};
+            throw std::runtime_error{"To run this application, specify the name of the test you want to try. For example:\n./prog color\npossible tests are: color, simple_image, image args*, grey args*"};
         }
         else
         {
@@ -92,7 +92,7 @@ int main(int argc, char const *argv[])
                 if(argc < 3) test_image("",true);
                 else test_image(argv[2],true);
             }
-            else throw std::runtime_error{"To run this application, specify the name of the test you want to try. For example:\n./prog color\npossible tests are: color, simple_image, image args*"};
+            else throw std::runtime_error{"To run this application, specify the name of the test you want to try. For example:\n./prog color\npossible tests are: color, simple_image, image args*, grey args*"};
         }
     }
     catch(const std::exception& e)
