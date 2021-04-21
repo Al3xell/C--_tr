@@ -3,6 +3,7 @@
 
 #include <tuple>
 #include <algorithm>
+#include <cmath>
 
 #include "color.hpp"
 
@@ -21,8 +22,8 @@ namespace s5loo
 
         void angle(double value) 
         {
-            if(angle_ <= -180) angle_ = 180;
-            else if(angle_ >= 180) angle_ = -180;
+            if(angle_ <= -180) angle_ += 360;
+            else if(angle_ >= 180) angle_ -= 360;
             angle_+= value;
         }
 
@@ -74,11 +75,12 @@ namespace s5loo
         x_+= dt*sx_;
         y_+= dt*sy_;
         angle(dt*angularSpeed_);
-        if(x_< std::get<0>(size())/2) {x_=std::get<0>(size())/2; sx_ *= -1;}
-        else if(x_> fwidth-std::get<0>(size())/2) {x_=fwidth-std::get<0>(size())/2; sx_*= -1;}
+        double radius = sqrt((std::get<0>(size())/2*std::get<0>(size())/2)+(std::get<1>(size())/2*std::get<1>(size())/2));
+        if(x_ < radius) {x_= radius; sx_ *= -1;}
+        else if(x_> fwidth-radius) {x_=fwidth-radius; sx_*= -1;}
         
-        if(y_< std::get<1>(size())/2) {y_= std::get<1>(size())/2; sy_ *= -1;}
-        else if(y_> fheight-std::get<1>(size())/2) {y_= fheight-std::get<1>(size())/2; sy_*= -1;}
+        if(y_< radius) {y_= radius; sy_ *= -1;}
+        else if(y_> fheight-radius) {y_= fheight-radius; sy_*= -1;}
         
 
     }
