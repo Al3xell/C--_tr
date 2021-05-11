@@ -45,7 +45,8 @@ namespace s5loo
                   double sx, double sy,
                   Color color,
                   double angularSpeed = 0.0)
-        : width_(width), height_(height),
+        : fwidth_(fwidth), fheight_(fheight),
+          width_(width), height_(height),
           x_{std::clamp(x,width/2,fwidth-width/2)}, y_{std::clamp(y,height/2,fheight-height/2)}, 
           sx_(sx), sy_(sy), 
           angle_(0.0), angularSpeed_(angularSpeed),
