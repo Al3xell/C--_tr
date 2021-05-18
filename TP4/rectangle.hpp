@@ -69,6 +69,7 @@ namespace s5loo
         std::default_random_engine rndGen{std::random_device{}()};
         std::uniform_real_distribution<double> angularDistr{-200, 200};
         
+        Shape::do_click(x, y, fwidth, fheight);
         angularSpeed_ = angularDistr(rndGen);
     }
 }
